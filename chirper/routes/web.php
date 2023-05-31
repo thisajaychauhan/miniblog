@@ -23,7 +23,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/chirps', [ChirpController::class, 'index'])->name('chirps.index')->middleware(['auth', 'verified']);
+Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit'])->name('chirps.edit')->middleware(['auth', 'verified']);
+Route::put('/chirps/{chirp}', [ChirpController::class, 'update'])->name('chirps.update')->middleware(['auth', 'verified']);
 Route::post('/chirps', [ChirpController::class, 'store'])->name('chirps.store')->middleware(['auth', 'verified']);
+Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy'])->name('chirps.destroy')->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ChirpController::class, 'edit'])->name('profile.edit');
